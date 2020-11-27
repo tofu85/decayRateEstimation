@@ -42,15 +42,15 @@ paramStruct=struct(field1,values1,field2,values2,field3,values3);
 expCoefficients=cell(size(paramStruct,2),2);
 for k1=1:size(paramStruct,2)
     
-    %% particle image count, seeded air:
+    %% read concentration data:
     path2info=[path2data paramStruct(k1).measurementID '.csv'];
     davisTable=readtable(path2info,'HeaderLines',1);
     noParticles=double(davisTable.Var2)';
-    % noParticlesMean=movmean(noParticles,15);
     timeInfo=0:(1/(frameRate*3600)):size(noParticles,2)/(frameRate*3600)-(1/(frameRate*3600));
-    %%
+    %% fit concentration data for fixed time range
     ind=find(timeInfo>paramStruct(k1).timeRange(1) & timeInfo<paramStruct(k1).timeRange(2));
     [fitParam,~]=fitExpDecay(timeInfo(ind), noParticles(ind), paramStruct(k1).startValues, paramStruct(k1).measurementID);
+    %% write results to cell
     expCoefficients{k1,2}=[fitParam.a fitParam.b log(.5)/(-fitParam.b) 1/fitParam.b];
     expCoefficients{k1,1}=paramStruct(k1).measurementID;
        
