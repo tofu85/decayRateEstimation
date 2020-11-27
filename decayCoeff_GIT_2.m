@@ -1,9 +1,8 @@
 clear
 close all
 clc
-addpath('./functions')
 %% basic parameters
-path2data='./dataGIT/';
+path2data='./dataConcentration/';
 frameRate=1;
 %% data structure
 field1='measurementID';field2='timeRange';field3='startValues';
