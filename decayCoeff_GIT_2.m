@@ -3,7 +3,7 @@ close all
 clc
 addpath('./functions')
 %% basic parameters
-path2data='./results/PNAS_GIT/dataGIT/';
+path2data='./dataGIT/';
 frameRate=1;
 %% data structure
 field1='measurementID';field2='timeRange';field3='startValues';
